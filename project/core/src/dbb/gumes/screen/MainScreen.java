@@ -17,7 +17,7 @@ public class MainScreen implements Screen {
     private static OrthographicCamera camera;
     private Viewport viewport;
 
-    private CutScene cutScene;cd 1
+    private CutScene cutScene;
 
     @Override
     public void show() {
