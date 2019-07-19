@@ -13,7 +13,7 @@ public abstract class GameObject {
 
     private Polygon bounds;
     private Sprite sprite;
-    private Animation animation;
+    protected Animation animation;
 
     public GameObject(TextureRegion textureRegion, float x, float y, float width, float height) {
         this.sprite = new Sprite(textureRegion);
@@ -48,5 +48,5 @@ public abstract class GameObject {
         this.sprite.draw(batch);
     }
 
-    public abstract void initAnimations(ArrayList<TextureRegion> regions);
+    public abstract void initAnimations(ArrayList<TextureRegion> frames, float cycleTime, boolean isLooping);
 }
