@@ -2,6 +2,7 @@ package dbb.gumes.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,7 +28,7 @@ public class MainScreen implements Screen {
         MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2, GumesGame.WORLD_HEIGHT / 2, 0);
         this.viewport.apply();
 
-        this.cutScene = new CutScene(GifDecoder.generateFrames(Gdx.files.internal("frozen.gif").read()), 3f, true);
+        this.cutScene = new CutScene(GifDecoder.generateFrames(Gdx.files.internal("gif/frozen.gif").read()), 3f, true);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class MainScreen implements Screen {
             this.cutScene.draw(batch, delta);
 
         this.batch.end();
+
     }
 
     @Override

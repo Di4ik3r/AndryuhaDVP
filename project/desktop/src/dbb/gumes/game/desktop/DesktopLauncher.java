@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		config.width = 1280;
 		config.height = 720;
 
-		config.fullscreen = true;
+		config.fullscreen = false;
 
 		config.foregroundFPS = 60;
 		config.vSyncEnabled = false;
