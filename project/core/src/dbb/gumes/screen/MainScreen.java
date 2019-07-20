@@ -6,11 +6,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.*;
 import dbb.gumes.game.GumesGame;
 import dbb.gumes.gameobject.animation.CutScene;
 import dbb.gumes.gameobject.animation.GifDecoder;
-
 
 public class MainScreen implements Screen {
 
@@ -20,31 +20,37 @@ public class MainScreen implements Screen {
 
     private CutScene cutScene;
 
+    private Stage stage;
+
     @Override
     public void show() {
         this.batch = new SpriteBatch();
         MainScreen.camera = new OrthographicCamera();
         this.viewport = new FillViewport(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, MainScreen.camera);
-        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2, GumesGame.WORLD_HEIGHT / 2, 0);
+//        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2, GumesGame.WORLD_HEIGHT / 2, 0);
+        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, 0);
         this.viewport.apply();
 
         this.cutScene = new CutScene(GifDecoder.generateFrames(Gdx.files.internal("gif/frozen.gif").read()), 3f, true);
+
+        this.stage = new Stage(this.viewport);
+        this.stage.addActor(this.cutScene);
+        this.stage.setKeyboardFocus(this.cutScene);
+
+        Gdx.input.setInputProcessor(this.stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1f, 0f, 0f, 1);
+//        Gdx.gl.glClearColor(1f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         MainScreen.camera.update();
         this.batch.setProjectionMatrix(camera.combined);
-        this.batch.begin();
 
-            this.cutScene.draw(batch, delta);
-
-        this.batch.end();
-
+        this.stage.act(delta);
+        this.stage.draw();
     }
 
     @Override
@@ -53,7 +59,8 @@ public class MainScreen implements Screen {
         MainScreen.camera.viewportHeight = GumesGame.WORLD_HEIGHT;
         this.viewport.update(width, height);
         this.viewport.update(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT);
-        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2f, GumesGame.WORLD_HEIGHT / 2f, 0);
+//        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2f, GumesGame.WORLD_HEIGHT / 2f, 0);
+        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH/2, GumesGame.WORLD_HEIGHT/2, 0);
     }
 
     @Override
