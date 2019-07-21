@@ -2,7 +2,6 @@ package dbb.gumes.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,7 +27,7 @@ public class MainScreen implements Screen {
         MainScreen.camera = new OrthographicCamera();
         this.viewport = new FillViewport(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, MainScreen.camera);
 //        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2, GumesGame.WORLD_HEIGHT / 2, 0);
-        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, 0);
+//        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, 0);
         this.viewport.apply();
 
         this.cutScene = new CutScene(GifDecoder.generateFrames(Gdx.files.internal("gif/frozen.gif").read()), 3f, true);
@@ -59,8 +58,7 @@ public class MainScreen implements Screen {
         MainScreen.camera.viewportHeight = GumesGame.WORLD_HEIGHT;
         this.viewport.update(width, height);
         this.viewport.update(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT);
-//        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2f, GumesGame.WORLD_HEIGHT / 2f, 0);
-        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH/2, GumesGame.WORLD_HEIGHT/2, 0);
+        MainScreen.camera.position.set(GumesGame.WORLD_WIDTH / 2f, GumesGame.WORLD_HEIGHT / 2f, 0);
     }
 
     @Override

@@ -16,22 +16,7 @@ public class CutScene extends GameObject {
         super(frames.get(0), 0, 0, GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT);
         initAnimations(frames, time, isLooping);
 
-        this.addListener(new InputListener() {
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                switch(keycode) {
-                    case Input.Keys.A:
-                        MoveByAction moveToAction = new MoveByAction();
-                        moveToAction.setAmount(1, 1);
-                        moveToAction.setDuration(1f);
-                        CutScene.this.addAction(moveToAction);
-                        break;
-                    default:
-                        break;
-                }
-                return true;
-            }
-        });
+
     }
 
     @Override
