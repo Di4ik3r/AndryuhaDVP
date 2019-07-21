@@ -28,6 +28,8 @@ public class MainScreen implements Screen {
         this.viewport.apply();
 
         this.cutScene = new CutScene(GifDecoder.generateFrames(Gdx.files.internal("frozen.gif").read()), 3f, true);
+
+
     }
 
     @Override
