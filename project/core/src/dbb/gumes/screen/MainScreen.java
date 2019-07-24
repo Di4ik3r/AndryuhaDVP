@@ -51,7 +51,8 @@ public class MainScreen implements Screen, InputProcessor {
 //        Gdx.input.setInputProcessor(this.stage);
         Gdx.input.setInputProcessor(this);
 
-        this.ui = new MainUI(this.stage);
+        this.ui = new MainUI();
+        this.stage.addActor(ui);
     }
 
     @Override

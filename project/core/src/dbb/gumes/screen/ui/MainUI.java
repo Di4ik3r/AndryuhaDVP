@@ -1,9 +1,11 @@
 package dbb.gumes.screen.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -17,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import dbb.gumes.game.GumesGame;
 import dbb.gumes.screen.MainScreen;
 
-public class MainUI {
+public class MainUI extends Group {
 
     private Stage stage;
     private Skin skin;
@@ -27,17 +29,13 @@ public class MainUI {
 
     private Vector2 unprojectedCoordinates;
 
-    private Group uiGroup;
-
-    public MainUI(Stage stage) {
-        this.stage = stage;
-
+    public MainUI() {
         this.skin = new Skin(Gdx.files.internal("skin.json"));
         this.font = new BitmapFont(Gdx.files.internal("font.fnt"));
 
         unprojectedCoordinates = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
 
-        this.labelMouse = createLabel("", 0.5f, new Vector2(0, -50));
+        this.labelMouse = createLabel("", 0.5f, new Vector2(0, 30));
             RunnableAction runnableActionX = new RunnableAction();
             runnableActionX.setRunnable(new Runnable() {
                 @Override
@@ -58,25 +56,11 @@ public class MainUI {
                 }
             });
         this.labelFPS.addAction(Actions.forever(runnableActionFPS));
-
-        this.stage.addActor(uiGroup);
     }
-
-    public void draw() {
-        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        this.stage.act();
-        this.stage.draw();
-
-//        this.labelFPS.setText(Gdx.graphics.getFramesPerSecond());
-    }
-
-//    public void dispose() {
-//        stage.dispose();
-//    }
 
     // ************************************************** OWN FUCNTIONS
     // **************************************************
+
 
     private Label createLabel(String text, float fontScale, Vector2 point) {
         Label label = new Label(text, this.skin.get("default", LabelStyle.class));
@@ -88,7 +72,7 @@ public class MainUI {
 //        label.setPosition(point.x, point.y + yyy );
 
 //        this.stage.addActor(label);
-        this.uiGroup.addActor(label);
+        this.addActor(label);
 
         return label;
     }
@@ -117,7 +101,7 @@ public class MainUI {
         table.add(btn).height(60);
         btn.setWidth(300);
 //        this.stage.addActor(table);
-        this.uiGroup.addActor(table);
+        this.addActor(table);
 
         return btn;
     }
