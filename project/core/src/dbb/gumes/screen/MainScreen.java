@@ -21,7 +21,6 @@ import sun.applet.Main;
 
 public class MainScreen implements Screen, InputProcessor {
 
-    private SpriteBatch batch;
     public static OrthographicCamera camera;
     private Viewport viewport;
 
@@ -35,8 +34,9 @@ public class MainScreen implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        this.batch = new SpriteBatch();
-        MainScreen.camera = new OrthographicCamera();
+        this.stage = new Stage();
+//        MainScreen.camera = new OrthographicCamera();
+        MainScreen.camera = (OrthographicCamera)this.stage.getCamera();
         this.viewport = new ExtendViewport(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, MainScreen.camera);
 //        this.viewport = new ScreenViewport(this.camera);
         this.viewport.apply();
@@ -44,7 +44,7 @@ public class MainScreen implements Screen, InputProcessor {
 
         this.cutScene = new CutScene(GifDecoder.generateFrames(Gdx.files.internal("gif/frozen.gif").read()), 3f, true);
 
-        this.stage = new Stage(this.viewport);
+        this.stage.setViewport(this.viewport);
         this.stage.addActor(this.cutScene);
 //        this.stage.setKeyboardFocus(this.cutScene);
 
@@ -57,12 +57,11 @@ public class MainScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1f, 0f, 0f, 1);
+        Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         MainScreen.camera.update();
-//        this.batch.setProjectionMatrix(camera.combined);
 
         this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -143,10 +142,10 @@ public class MainScreen implements Screen, InputProcessor {
                 MainScreen.camera.translate(0, -MainScreen.cameraSpeed);
                 break;
             case Input.Keys.Q:
-                MainScreen.camera.zoom += 0.5;
+                MainScreen.camera.zoom += 0.1;
                 break;
             case Input.Keys.E:
-                MainScreen.camera.zoom -= 0.5;
+                MainScreen.camera.zoom -= 0.1;
                 break;
             case Input.Keys.NUM_1:
                 this.fontScale -= 0.1f;

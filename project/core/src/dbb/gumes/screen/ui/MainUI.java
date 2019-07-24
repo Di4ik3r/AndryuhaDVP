@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -21,12 +22,9 @@ import dbb.gumes.screen.MainScreen;
 
 public class MainUI extends Group {
 
-    private Stage stage;
     private Skin skin;
     private BitmapFont font;
-
     private Label labelMouse, labelFPS, labelLength;
-
     private Vector2 unprojectedCoordinates;
 
     public MainUI() {
@@ -47,7 +45,7 @@ public class MainUI extends Group {
         this.labelMouse.addAction(Actions.forever(runnableActionX));
         this.labelMouse.setName("labelMouse");
 
-        this.labelFPS = createLabel("", 0.6f, new Vector2(1540, 890));
+        this.labelFPS = createLabel("", 0.5f, new Vector2(1540, 890));
             RunnableAction runnableActionFPS = new RunnableAction();
             runnableActionFPS.setRunnable(new Runnable() {
                 @Override
@@ -56,6 +54,16 @@ public class MainUI extends Group {
                 }
             });
         this.labelFPS.addAction(Actions.forever(runnableActionFPS));
+
+
+        RunnableAction runnableActionGroup = new RunnableAction();
+        runnableActionGroup.setRunnable(new Runnable() {
+            @Override
+            public void run() {
+                MainUI.this.setPosition(MainScreen.camera.position.x - GumesGame.WORLD_WIDTH/2, MainScreen.camera.position.y - GumesGame.WORLD_HEIGHT/2);
+            }
+        });
+        this.addAction(Actions.forever(runnableActionGroup));
     }
 
     // ************************************************** OWN FUCNTIONS
