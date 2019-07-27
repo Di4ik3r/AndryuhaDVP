@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21ada012-d75e-405e-aa12-073d4b293832" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/core/assets/world/lvl.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/assets/world/tileset_gutter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/core/META-INF/core.kotlin_module" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/assets/font.fnt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/assets/font_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/assets/font_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/assets/skin.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/dbb/gumes/game/GumesGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/dbb/gumes/game/GumesGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/dbb/gumes/screen/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/dbb/gumes/screen/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/dbb/gumes/screen/ui/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/dbb/gumes/screen/ui/MainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/core/dbb/gumes/game/GumesGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/core/dbb/gumes/game/GumesGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/core/dbb/gumes/gameobject/animation/CutScene$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/core/dbb/gumes/gameobject/animation/CutScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/core/dbb/gumes/gameobject/animation/CutScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/core/dbb/gumes/screen/MainScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/core/dbb/gumes/screen/MainScreen.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

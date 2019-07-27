@@ -22,6 +22,9 @@ import dbb.gumes.screen.MainScreen;
 
 public class MainUI {
 
+    private static float UI_WIDTH = 1600;
+    private static float UI_HEIGHT = 900;
+
     private Stage stage;
     private Skin skin;
     private BitmapFont font;
@@ -32,11 +35,11 @@ public class MainUI {
         this.stage = new Stage();
 
 //        ((OrthographicCamera)this.stage.getCamera()).position.setZero();
-        ((OrthographicCamera)this.stage.getCamera()).position.set(GumesGame.WORLD_WIDTH/2, GumesGame.WORLD_HEIGHT/2, 0);
-        this.stage.setViewport(new StretchViewport(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, this.stage.getCamera()));
+        ((OrthographicCamera)this.stage.getCamera()).position.set(MainUI.UI_WIDTH/2, MainUI.UI_HEIGHT/2, 0);
+        this.stage.setViewport(new StretchViewport(MainUI.UI_WIDTH, MainUI.UI_HEIGHT, this.stage.getCamera()));
 
-        this.skin = new Skin(Gdx.files.internal("skin.json"));
-        this.font = new BitmapFont(Gdx.files.internal("font.fnt"));
+        this.skin = new Skin(Gdx.files.internal("font/skin.json"));
+        this.font = new BitmapFont(Gdx.files.internal("font/font.fnt"));
 
         mouseCoord = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
 

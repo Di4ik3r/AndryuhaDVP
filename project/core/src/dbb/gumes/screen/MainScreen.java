@@ -6,7 +6,13 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+<<<<<<< HEAD
 import com.badlogic.gdx.maps.MapObject;
+=======
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+>>>>>>> master
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -19,7 +25,7 @@ import dbb.gumes.gameobject.animation.CutScene;
 import dbb.gumes.gameobject.animation.GifDecoder;
 import dbb.gumes.screen.ui.MainUI;
 
-public class MainScreen implements Screen, InputProcessor {
+public class MainScreen implements Screen {
 
     public static OrthographicCamera camera;
     private Viewport viewport;
@@ -29,8 +35,11 @@ public class MainScreen implements Screen, InputProcessor {
     private Stage stage;
     private MainUI ui;
 
-    private static float cameraSpeed = 40;
-    private float fontScale =  1;
+    private static float cameraSpeed = 4;
+
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer mapRenderer;
 
     private World world;
     private Box2DDebugRenderer b2dr;
@@ -57,22 +66,31 @@ public class MainScreen implements Screen, InputProcessor {
         this.ui = new MainUI();
 //        this.stage.addActor(ui);
 
+        this.mapLoader = new TmxMapLoader();
+        this.map = this.mapLoader.load("world/lvl.tmx");
+        this.mapRenderer = new OrthogonalTiledMapRenderer(this.map);
+
         this.world = new World(new Vector2(0, 0), true);
         this.b2dr = new Box2DDebugRenderer();
+
+        
     }
 
     @Override
     public void render(float delta) {
+        this.updateWorld(delta);
+        this.handleInput();
+
         Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         MainScreen.camera.update();
 
-//        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         this.stage.act(delta);
         this.stage.draw();
+
+        this.mapRenderer.render();
 
         this.ui.draw();
     }
@@ -109,6 +127,14 @@ public class MainScreen implements Screen, InputProcessor {
     }
 
 
+    private void updateWorld(float delta) {
+        MainScreen.camera.update();
+        this.mapRenderer.setView(MainScreen.camera);
+    }
+
+
+
+
     public static Vector2 unproj(float x, float y) {
         Vector3 buff = MainScreen.camera.unproject(new Vector3(x, y, 0));
         return new Vector2(buff.x, buff.y);
@@ -132,79 +158,24 @@ public class MainScreen implements Screen, InputProcessor {
 
     // *********************************************************************************************
 
-
-
-    @Override
-    public boolean keyDown(int keycode) {
-        switch (keycode) {
-            case Input.Keys.A:
-                MainScreen.camera.translate(-MainScreen.cameraSpeed, 0);
-                break;
-            case Input.Keys.D:
-                MainScreen.camera.translate(MainScreen.cameraSpeed, 0);
-                break;
-            case Input.Keys.W:
-                MainScreen.camera.translate(0, MainScreen.cameraSpeed);
-                break;
-            case Input.Keys.S:
-                MainScreen.camera.translate(0, -MainScreen.cameraSpeed);
-                break;
-            case Input.Keys.Q:
-                MainScreen.camera.zoom += 0.1;
-                break;
-            case Input.Keys.E:
-                MainScreen.camera.zoom -= 0.1;
-                break;
-            case Input.Keys.NUM_1:
-                this.fontScale -= 0.1f;
-                ((Label)this.stage.getRoot().findActor("labelMouse")).setFontScale(this.fontScale);
-                Gdx.app.log("log", this.fontScale + "");
-                break;
-            case Input.Keys.NUM_2:
-                this.fontScale += 0.1f;
-                ((Label)this.stage.getRoot().findActor("labelMouse")).setFontScale(this.fontScale);
-                Gdx.app.log("log", this.fontScale + "");
-                break;
+    private void handleInput() {
+        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+            MainScreen.camera.translate(-MainScreen.cameraSpeed, 0);
         }
-        return true;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.log("mousePressed", Gdx.input.getX() + " : " + Gdx.input.getY());
-        Vector2 b = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
-        Gdx.app.log("mousePressed", b.x + " : " + b.y);
-
-        return true;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
+        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+            MainScreen.camera.translate(MainScreen.cameraSpeed, 0);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+            MainScreen.camera.translate(0, MainScreen.cameraSpeed);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+            MainScreen.camera.translate(0, -MainScreen.cameraSpeed);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            MainScreen.camera.zoom += 0.04;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.E)) {
+            MainScreen.camera.zoom -= 0.04;
+        }
     }
 }
