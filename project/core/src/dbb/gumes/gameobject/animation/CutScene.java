@@ -23,31 +23,44 @@ public class CutScene extends VisualObject {
         super(frames.get(0), new Vector2(0, 0), new Dimension(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT));
         initAnimations(frames, time, isLooping);
 
-        this.addListener(new InputListener() {
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                switch (keycode) {
-                    case Input.Keys.A:
-                        Gdx.app.log("log", "a pressed");
-                        ColorAction ca = new ColorAction();
-                        ca.setEndColor(Color.RED);
-                        ca.setDuration(2f);
-                        CutScene.this.addAction(ca);
-                        break;
-
-                    case Input.Keys.B:
-                        Gdx.app.log("log", "b pressed");
-                        MoveByAction ma = new MoveByAction();
-                        ma.setAmount(1, 1);
-                        ma.setDuration(2f);
-                        CutScene.this.addAction(ma);
-                        break;
-                    default:
-                        break;
-                }
-                return true;
-            }
-        });
+//        this.addListener(new InputListener() {
+//            @Override
+//            public boolean keyDown(InputEvent event, int keycode) {
+//                switch (keycode) {
+//                    case Input.Keys.A:
+//                        Gdx.app.log("log", "a pressed");
+//                        ColorAction ca = new ColorAction();
+//                        ca.setEndColor(Color.RED);
+//                        ca.setDuration(2f);
+//                        CutScene.this.addAction(ca);
+//                        break;
+//                    case Input.Keys.D:
+//                        Gdx.app.log("log", "d pressed");
+//                        ColorAction caa = new ColorAction();
+//                        caa.setEndColor(Color.GOLD);
+//                        caa.setDuration(2f);
+//                        CutScene.this.addAction(caa);
+//                        break;
+//                    case Input.Keys.B:
+//                        Gdx.app.log("log", "b pressed");
+//                        MoveByAction ma = new MoveByAction();
+//                        ma.setAmount(16, 9);
+//                        ma.setDuration(2f);
+//                        CutScene.this.addAction(ma);
+//                        break;
+//                    case Input.Keys.C:
+//                        Gdx.app.log("log", "c pressed");
+//                        MoveByAction maa = new MoveByAction();
+//                        maa.setAmount(-16, -9);
+//                        maa.setDuration(2f);
+//                        CutScene.this.addAction(maa);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
     }
 
     @Override

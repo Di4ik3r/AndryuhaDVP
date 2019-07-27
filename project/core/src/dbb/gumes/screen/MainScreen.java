@@ -6,10 +6,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.*;
@@ -17,7 +15,6 @@ import dbb.gumes.game.GumesGame;
 import dbb.gumes.gameobject.animation.CutScene;
 import dbb.gumes.gameobject.animation.GifDecoder;
 import dbb.gumes.screen.ui.MainUI;
-import sun.applet.Main;
 
 public class MainScreen implements Screen, InputProcessor {
 
@@ -27,6 +24,7 @@ public class MainScreen implements Screen, InputProcessor {
     private CutScene cutScene;
 
     private Stage stage;
+//    private MainUI ui;
     private MainUI ui;
 
     private static float cameraSpeed = 40;
@@ -46,13 +44,13 @@ public class MainScreen implements Screen, InputProcessor {
 
         this.stage.setViewport(this.viewport);
         this.stage.addActor(this.cutScene);
-//        this.stage.setKeyboardFocus(this.cutScene);
+        this.stage.setKeyboardFocus(this.cutScene);
 
-//        Gdx.input.setInputProcessor(this.stage);
-        Gdx.input.setInputProcessor(this);
+        Gdx.input.setInputProcessor(this.stage);
 
+//        this.ui = new MainUI();
         this.ui = new MainUI();
-        this.stage.addActor(ui);
+//        this.stage.addActor(ui);
     }
 
     @Override
@@ -63,10 +61,12 @@ public class MainScreen implements Screen, InputProcessor {
 
         MainScreen.camera.update();
 
-        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         this.stage.act(delta);
         this.stage.draw();
+
+        this.ui.draw();
     }
 
     @Override
@@ -177,8 +177,6 @@ public class MainScreen implements Screen, InputProcessor {
         Vector2 b = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
         Gdx.app.log("mousePressed", b.x + " : " + b.y);
 
-        Vector2 v = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
-        ((Label)this.stage.getRoot().findActor("labelMouse")).setPosition(v.x, v.y);
         return true;
     }
 
