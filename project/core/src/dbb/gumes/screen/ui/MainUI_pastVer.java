@@ -1,11 +1,10 @@
 package dbb.gumes.screen.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -14,61 +13,53 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import dbb.gumes.game.GumesGame;
 import dbb.gumes.screen.MainScreen;
 
-public class TestUI {
+public class MainUI_pastVer extends Group {
 
-    private Stage stage;
     private Skin skin;
     private BitmapFont font;
     private Label labelMouse, labelFPS, labelLength;
-    private Vector2 mouseCoord;
+    private Vector2 unprojectedCoordinates;
 
-    public TestUI() {
-        this.stage = new Stage();
-
-//        ((OrthographicCamera)this.stage.getCamera()).position.setZero();
-        ((OrthographicCamera)this.stage.getCamera()).position.set(GumesGame.WORLD_WIDTH/2, GumesGame.WORLD_HEIGHT/2, 0);
-        this.stage.setViewport(new StretchViewport(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT, this.stage.getCamera()));
-
+    public MainUI_pastVer() {
         this.skin = new Skin(Gdx.files.internal("skin.json"));
         this.font = new BitmapFont(Gdx.files.internal("font.fnt"));
 
-        mouseCoord = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
+        unprojectedCoordinates = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
 
-        this.labelMouse = createLabel("", 0.5f,  new Vector2(0, 30));
-        RunnableAction runnableActionX = new RunnableAction();
-        runnableActionX.setRunnable(new Runnable() {
-            @Override
-            public void run() {
-                mouseCoord = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
-                labelMouse.setText(mouseCoord.x + " : " + mouseCoord.y);
-            }
-        });
+        this.labelMouse = createLabel("", 0.5f, new Vector2(0, 30));
+            RunnableAction runnableActionX = new RunnableAction();
+            runnableActionX.setRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    unprojectedCoordinates = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
+                    labelMouse.setText(unprojectedCoordinates.x + " : " + unprojectedCoordinates.y);
+                }
+            });
         this.labelMouse.addAction(Actions.forever(runnableActionX));
         this.labelMouse.setName("labelMouse");
 
-//        this.labelFPS = createLabel("", 0.5f, new Vector2(1540, 890));
         this.labelFPS = createLabel("", 0.5f, new Vector2(1540, 890));
-        RunnableAction runnableActionFPS = new RunnableAction();
-        runnableActionFPS.setRunnable(new Runnable() {
+            RunnableAction runnableActionFPS = new RunnableAction();
+            runnableActionFPS.setRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    labelFPS.setText(Gdx.graphics.getFramesPerSecond());
+                }
+            });
+        this.labelFPS.addAction(Actions.forever(runnableActionFPS));
+
+
+        RunnableAction runnableActionGroup = new RunnableAction();
+        runnableActionGroup.setRunnable(new Runnable() {
             @Override
             public void run() {
-                labelFPS.setText(Gdx.graphics.getFramesPerSecond());
+                MainUI_pastVer.this.setPosition(MainScreen.camera.position.x - GumesGame.WORLD_WIDTH/2, MainScreen.camera.position.y - GumesGame.WORLD_HEIGHT/2);
             }
         });
-        this.labelFPS.addAction(Actions.forever(runnableActionFPS));
-    }
-
-    public void draw() {
-        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        this.stage.act();
-        this.stage.draw();
+        this.addAction(Actions.forever(runnableActionGroup));
     }
 
     // ************************************************** OWN FUCNTIONS
@@ -85,7 +76,7 @@ public class TestUI {
 //        label.setPosition(point.x, point.y + yyy );
 
 //        this.stage.addActor(label);
-        this.stage.addActor(label);
+        this.addActor(label);
 
         return label;
     }
@@ -114,9 +105,15 @@ public class TestUI {
         table.add(btn).height(60);
         btn.setWidth(300);
 //        this.stage.addActor(table);
-        this.stage.addActor(table);
+        this.addActor(table);
 
         return btn;
     }
-}
 
+    public void sendInfo(Vector3 vector, float length) {
+        this.labelMouse.setText(Float.toString(vector.x));
+//        this.labelY.setText(Float.toString(vector.y));
+        this.labelLength.setText("Length: " + Float.toString(length));
+
+    }
+}
