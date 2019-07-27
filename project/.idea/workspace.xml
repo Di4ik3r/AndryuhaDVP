@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21ada012-d75e-405e-aa12-073d4b293832" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/font/skin.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/assets/font/skin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/dbb/gumes/screen/ui/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/dbb/gumes/screen/ui/MainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/dbb/gumes/screen/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/dbb/gumes/screen/MainScreen.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

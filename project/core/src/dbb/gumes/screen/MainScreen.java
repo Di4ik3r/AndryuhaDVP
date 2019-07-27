@@ -6,8 +6,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.*;
@@ -24,11 +27,13 @@ public class MainScreen implements Screen, InputProcessor {
     private CutScene cutScene;
 
     private Stage stage;
-//    private MainUI ui;
     private MainUI ui;
 
     private static float cameraSpeed = 40;
     private float fontScale =  1;
+
+    private World world;
+    private Box2DDebugRenderer b2dr;
 
     @Override
     public void show() {
@@ -51,6 +56,9 @@ public class MainScreen implements Screen, InputProcessor {
 //        this.ui = new MainUI();
         this.ui = new MainUI();
 //        this.stage.addActor(ui);
+
+        this.world = new World(new Vector2(0, 0), true);
+        this.b2dr = new Box2DDebugRenderer();
     }
 
     @Override
