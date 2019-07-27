@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21ada012-d75e-405e-aa12-073d4b293832" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/gradle_wrapper.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/dbb/gumes/screen/ui/TestUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/dbb/gumes/screen/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/dbb/gumes/screen/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/src/dbb/gumes/game/desktop/DesktopLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/src/dbb/gumes/game/desktop/DesktopLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/core/dbb/gumes/screen/MainScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/core/dbb/gumes/screen/MainScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/desktop/dbb/gumes/game/desktop/DesktopLauncher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/desktop/dbb/gumes/game/desktop/DesktopLauncher.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +36,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="show.inlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RunDashboard">
@@ -83,7 +87,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

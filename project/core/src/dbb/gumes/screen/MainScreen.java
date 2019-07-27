@@ -17,6 +17,7 @@ import dbb.gumes.game.GumesGame;
 import dbb.gumes.gameobject.animation.CutScene;
 import dbb.gumes.gameobject.animation.GifDecoder;
 import dbb.gumes.screen.ui.MainUI;
+import dbb.gumes.screen.ui.TestUI;
 import sun.applet.Main;
 
 public class MainScreen implements Screen, InputProcessor {
@@ -27,7 +28,8 @@ public class MainScreen implements Screen, InputProcessor {
     private CutScene cutScene;
 
     private Stage stage;
-    private MainUI ui;
+//    private MainUI ui;
+    private TestUI ui;
 
     private static float cameraSpeed = 40;
     private float fontScale =  1;
@@ -51,8 +53,9 @@ public class MainScreen implements Screen, InputProcessor {
 //        Gdx.input.setInputProcessor(this.stage);
         Gdx.input.setInputProcessor(this);
 
-        this.ui = new MainUI();
-        this.stage.addActor(ui);
+//        this.ui = new MainUI();
+        this.ui = new TestUI();
+//        this.stage.addActor(ui);
     }
 
     @Override
@@ -63,10 +66,12 @@ public class MainScreen implements Screen, InputProcessor {
 
         MainScreen.camera.update();
 
-        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         this.stage.act(delta);
         this.stage.draw();
+
+        this.ui.draw();
     }
 
     @Override
