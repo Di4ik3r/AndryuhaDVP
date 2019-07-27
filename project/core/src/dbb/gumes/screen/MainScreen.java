@@ -19,7 +19,7 @@ import dbb.gumes.gameobject.animation.CutScene;
 import dbb.gumes.gameobject.animation.GifDecoder;
 import dbb.gumes.screen.ui.MainUI;
 
-public class MainScreen implements Screen, InputProcessor {
+public class MainScreen implements Screen {
 
     public static OrthographicCamera camera;
     private Viewport viewport;
@@ -30,7 +30,7 @@ public class MainScreen implements Screen, InputProcessor {
 //    private MainUI ui;
     private MainUI ui;
 
-    private static float cameraSpeed = 40;
+    private static float cameraSpeed = 4;
 
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -52,8 +52,7 @@ public class MainScreen implements Screen, InputProcessor {
         this.stage.addActor(this.cutScene);
         this.stage.setKeyboardFocus(this.cutScene);
 
-//        Gdx.input.setInputProcessor(this.stage);
-        Gdx.input.setInputProcessor(this);
+        Gdx.input.setInputProcessor(this.stage);
 
 //        this.ui = new MainUI();
         this.ui = new MainUI();
@@ -67,15 +66,13 @@ public class MainScreen implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         this.updateWorld(delta);
+        this.handleInput();
 
         Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-
         MainScreen.camera.update();
-
-//        this.stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         this.stage.act(delta);
         this.stage.draw();
@@ -148,69 +145,24 @@ public class MainScreen implements Screen, InputProcessor {
 
     // *********************************************************************************************
 
-
-
-    @Override
-    public boolean keyDown(int keycode) {
-        switch (keycode) {
-            case Input.Keys.A:
-                MainScreen.camera.translate(-MainScreen.cameraSpeed, 0);
-                break;
-            case Input.Keys.D:
-                MainScreen.camera.translate(MainScreen.cameraSpeed, 0);
-                break;
-            case Input.Keys.W:
-                MainScreen.camera.translate(0, MainScreen.cameraSpeed);
-                break;
-            case Input.Keys.S:
-                MainScreen.camera.translate(0, -MainScreen.cameraSpeed);
-                break;
-            case Input.Keys.Q:
-                MainScreen.camera.zoom += 0.1;
-                break;
-            case Input.Keys.E:
-                MainScreen.camera.zoom -= 0.1;
-                break;
+    private void handleInput() {
+        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+            MainScreen.camera.translate(-MainScreen.cameraSpeed, 0);
         }
-        return true;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.log("mousePressed", Gdx.input.getX() + " : " + Gdx.input.getY());
-        Vector2 b = MainScreen.unproj(Gdx.input.getX(), Gdx.input.getY());
-        Gdx.app.log("mousePressed", b.x + " : " + b.y);
-
-        return true;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
+        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+            MainScreen.camera.translate(MainScreen.cameraSpeed, 0);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+            MainScreen.camera.translate(0, MainScreen.cameraSpeed);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+            MainScreen.camera.translate(0, -MainScreen.cameraSpeed);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            MainScreen.camera.zoom += 0.04;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.E)) {
+            MainScreen.camera.zoom -= 0.04;
+        }
     }
 }
