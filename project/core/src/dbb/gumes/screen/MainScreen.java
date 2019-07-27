@@ -6,6 +6,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -28,7 +31,10 @@ public class MainScreen implements Screen, InputProcessor {
     private MainUI ui;
 
     private static float cameraSpeed = 40;
-    private float fontScale =  1;
+
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer mapRenderer;
 
     @Override
     public void show() {
@@ -46,18 +52,26 @@ public class MainScreen implements Screen, InputProcessor {
         this.stage.addActor(this.cutScene);
         this.stage.setKeyboardFocus(this.cutScene);
 
-        Gdx.input.setInputProcessor(this.stage);
+//        Gdx.input.setInputProcessor(this.stage);
+        Gdx.input.setInputProcessor(this);
 
 //        this.ui = new MainUI();
         this.ui = new MainUI();
 //        this.stage.addActor(ui);
+
+        this.mapLoader = new TmxMapLoader();
+        this.map = this.mapLoader.load("world/lvl.tmx");
+        this.mapRenderer = new OrthogonalTiledMapRenderer(this.map);
     }
 
     @Override
     public void render(float delta) {
+        this.updateWorld(delta);
+
         Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 
         MainScreen.camera.update();
 
@@ -65,6 +79,8 @@ public class MainScreen implements Screen, InputProcessor {
 
         this.stage.act(delta);
         this.stage.draw();
+
+        this.mapRenderer.render();
 
         this.ui.draw();
     }
@@ -99,6 +115,14 @@ public class MainScreen implements Screen, InputProcessor {
     public void dispose() {
 
     }
+
+
+    private void updateWorld(float delta) {
+        MainScreen.camera.update();
+        this.mapRenderer.setView(MainScreen.camera);
+    }
+
+
 
 
     public static Vector2 unproj(float x, float y) {
@@ -146,16 +170,6 @@ public class MainScreen implements Screen, InputProcessor {
                 break;
             case Input.Keys.E:
                 MainScreen.camera.zoom -= 0.1;
-                break;
-            case Input.Keys.NUM_1:
-                this.fontScale -= 0.1f;
-                ((Label)this.stage.getRoot().findActor("labelMouse")).setFontScale(this.fontScale);
-                Gdx.app.log("log", this.fontScale + "");
-                break;
-            case Input.Keys.NUM_2:
-                this.fontScale += 0.1f;
-                ((Label)this.stage.getRoot().findActor("labelMouse")).setFontScale(this.fontScale);
-                Gdx.app.log("log", this.fontScale + "");
                 break;
         }
         return true;
