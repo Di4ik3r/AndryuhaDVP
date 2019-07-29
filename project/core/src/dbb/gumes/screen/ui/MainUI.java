@@ -14,13 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import dbb.gumes.game.GumesGame;
 import dbb.gumes.screen.MainScreen;
 
-public class MainUI {
+public class MainUI implements Disposable {
 
     private static float UI_WIDTH = 1600;
     private static float UI_HEIGHT = 900;
@@ -120,6 +121,11 @@ public class MainUI {
         this.stage.addActor(table);
 
         return btn;
+    }
+
+    @Override
+    public void dispose() {
+        this.stage.dispose();
     }
 }
 

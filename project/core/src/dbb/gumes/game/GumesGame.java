@@ -12,8 +12,10 @@ import dbb.gumes.screen.MainScreen;
 
 public class GumesGame extends Game {
 
-	public static final int WORLD_WIDTH = 160;
-	public static final int WORLD_HEIGHT = 90;
+	public static final int WORLD_WIDTH = 426;
+	public static final int WORLD_HEIGHT = 240;
+	public static final float PPM = 1;
+
 	private MainScreen mainScreen;
 
 	private static Assets assets;

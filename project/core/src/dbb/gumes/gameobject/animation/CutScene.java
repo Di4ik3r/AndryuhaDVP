@@ -20,7 +20,7 @@ public class CutScene extends VisualObject {
 
     public CutScene(ArrayList<TextureRegion> frames, float time, boolean isLooping) {
 //        super(frames.get(0), 0, 0, GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT);
-        super(frames.get(0), new Vector2(0, 0), new Dimension(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT));
+        super(frames.get(0), new Vector2(0, 0), new Vector2(GumesGame.WORLD_WIDTH, GumesGame.WORLD_HEIGHT));
         initAnimations(frames, time, isLooping);
 
 //        this.addListener(new InputListener() {

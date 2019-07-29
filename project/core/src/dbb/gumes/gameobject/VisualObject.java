@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import dbb.gumes.game.GumesGame;
 import dbb.gumes.gameobject.animation.Animation;
 
 import java.awt.*;
@@ -23,10 +24,10 @@ public abstract class VisualObject extends Image {
 //    private Sprite sprite;
     protected Animation animation;
 
-    public VisualObject(TextureRegion texture, Vector2 point, Dimension size) {
+    public VisualObject(TextureRegion texture, Vector2 point, Vector2 size) {
         super(texture);
-        this.setPosition(point.x, point.y);
-        this.setSize(size.width, size.height);
+        this.setPosition(point.x / GumesGame.PPM, point.y / GumesGame.PPM);
+        this.setSize(size.x / GumesGame.PPM, size.y / GumesGame.PPM);
         this.setBounds(this.getX(), this.getY(), this.getWidth(), this.getHeight());
         this.setTouchable(Touchable.enabled);
     }
