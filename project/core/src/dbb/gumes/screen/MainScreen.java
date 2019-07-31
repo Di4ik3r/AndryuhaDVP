@@ -114,7 +114,7 @@ public class MainScreen implements Screen {
         this.stage.act(delta);
         this.stage.draw();
 
-//        this.b2dr.render(this.world, MainScreen.camera.combined);
+        this.b2dr.render(this.world, MainScreen.camera.combined);
 
         this.ui.draw();
     }
@@ -224,5 +224,13 @@ public class MainScreen implements Screen {
         if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
             MainScreen.camera.zoom -= 0.04;
         }
+    }
+
+    public World getWorld() {
+        return this.world;
+    }
+
+    public TiledMap getMap() {
+        return this.map;
     }
 }

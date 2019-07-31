@@ -58,6 +58,13 @@ public class Player extends VisualObject {
 
         body.createFixture(fDef);
 
+        EdgeShape sensor = new EdgeShape();
+        sensor.set(new Vector2(-2 / GumesGame.PPM, 5 / GumesGame.PPM), new Vector2(2 / GumesGame.PPM, 5 / GumesGame.PPM));
+        fDef.shape = sensor;
+        fDef.isSensor = true;
+
+        body.createFixture(fDef).setUserData("sensor");
+
         Gdx.app.log("log", Float.toString(body.getGravityScale()));
     }
 
