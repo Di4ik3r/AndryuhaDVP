@@ -25,6 +25,7 @@ import dbb.gumes.gameobject.Player;
 import dbb.gumes.gameobject.animation.CutScene;
 import dbb.gumes.gameobject.animation.GifDecoder;
 import dbb.gumes.gameobject.world.GameWorld;
+import dbb.gumes.misc.WorldContactListener;
 import dbb.gumes.screen.ui.MainUI;
 
 import java.awt.*;
@@ -82,6 +83,7 @@ public class MainScreen implements Screen {
         this.mapRenderer = new OrthogonalTiledMapRenderer(this.map, 1 / GumesGame.PPM);
 
         this.world = new World(new Vector2(0, -10), true);
+        this.world.setContactListener(new WorldContactListener());
         this.b2dr = new Box2DDebugRenderer();
 
         gameWorld = new GameWorld(this.world, this.map);

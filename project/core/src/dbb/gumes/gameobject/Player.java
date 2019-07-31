@@ -1,6 +1,7 @@
 package dbb.gumes.gameobject;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
@@ -23,8 +24,6 @@ public class Player extends VisualObject {
     private World world;
     private Body body;
 
-    private Vector2 size;
-
     public Player(World world, TextureRegion texture, Vector2 point, Vector2 size) {
         super(texture, point, size);
         this.world = world;
@@ -33,19 +32,11 @@ public class Player extends VisualObject {
 
         Gdx.app.log("log", point.toString());
         Gdx.app.log("log", size.toString());
-
-        this.size = new Vector2(size.x / 2 / GumesGame.PPM, size.y / 2 / GumesGame.PPM);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-//        this.setX(this.body.getPosition().x - this.size.x);
-//        this.setY(this.body.getPosition().y - this.size.y);
-
-//        this.setX(this.body.getPosition().x);
-//        this.setY(this.body.getPosition().y);
-
         this.setPosition(body.getPosition().x - this.getWidth() / 2, body.getPosition().y - this.getHeight() / 2);
     }
 
@@ -61,8 +52,6 @@ public class Player extends VisualObject {
         body = this.world.createBody(bDef);
 
         FixtureDef fDef = new FixtureDef();
-//        CircleShape shape = new CircleShape();
-//        shape.setRadius(2 / GumesGame.PPM);
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(size.x / 2, size.y / 2);
         fDef.shape = shape;
